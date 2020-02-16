@@ -1,4 +1,11 @@
-runs-on: ubuntu-latest
+name: .NET Core
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
@@ -6,11 +13,3 @@ runs-on: ubuntu-latest
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.0
-    
-    # dotnet build and publish
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
-    - name: dotnet publish
-      run: |
-        dotnet publish -c Release -o dotnetcorewebapp 
-    
