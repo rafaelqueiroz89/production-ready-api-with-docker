@@ -13,7 +13,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.0.100
-    - name: build with .net 
-      run: dotnet build ./src/Checkout.PaymentGateway.sln --configuration Release
-    - name: test with .net  
-      run: dotnet test ./src/Checkout.PaymentGateway.sln --configuration Release 
+    - name: build API
+      run: dotnet build ./src/Checkout.PaymentGateway.Api/Checkout.PaymentGateway.Api.csproj --configuration Release
+    - name: test project
+      run: dotnet build ./src/Checkout.PaymentGateway.Tests/Checkout.PaymentGateway.Tests.csproj --configuration Release 
