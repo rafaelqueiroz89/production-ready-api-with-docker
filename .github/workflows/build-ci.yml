@@ -15,9 +15,10 @@ jobs:
       with:
         dotnet-version: 3.0.100
       if: matrix.os == 'macOS-latest' || matrix.os == 'ubuntu-latest'
-    -uses: actions/checkout@v1
-    -name: Build with dotnet
-    run: dotnet build ./src/Checkout.PaymentGateway.sln --configuration Release
-    -name: Test with dotnet
-    run: dotnet test ./src/Checkout.PaymentGateway.sln --configuration Release
+      steps:
+      -uses: actions/checkout@v1
+      -name: Build with dotnet
+      run: dotnet build ./src/Checkout.PaymentGateway.sln --configuration Release
+      -name: Test with dotnet
+      run: dotnet test ./src/Checkout.PaymentGateway.sln --configuration Release
     
