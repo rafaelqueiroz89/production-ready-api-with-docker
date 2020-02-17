@@ -13,4 +13,4 @@ jobs:
     - name: build API
       run: dotnet build ./src/Checkout.PaymentGateway.Api/Checkout.PaymentGateway.Api.csproj --configuration Release
     - name: test project
-      run: dotnet build ./src/Checkout.PaymentGateway.Api.Tests/Checkout.PaymentGateway.Api.Tests.csproj --configuration Release 
+      run: dotnet tests ./src/Checkout.PaymentGateway.Api.Tests/Checkout.PaymentGateway.Api.Tests.csproj
