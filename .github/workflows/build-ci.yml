@@ -1,5 +1,4 @@
 name: build-ci
-
 on:
   pull_request:
     branches:
@@ -7,16 +6,14 @@ on:
   push:
     branches:
       - development
-
 jobs:
-  build-and-test:
+  build_and_test:
     runs-on: ${{ matrix.os }}
-    
-strategy:
+    strategy:
       matrix:
         os: [macOS-latest, ubuntu-latest, windows-latest]
-steps:
-    - name: Setup .NET Core if needed
+        steps: 
+        - name: Setup .NET Core if needed
       uses: actions/setup-dotnet@v1.2.0
       with:
         dotnet-version: 3.0.100
@@ -26,3 +23,4 @@ steps:
       run: dotnet build ./src/Checkout.PaymentGateway.sln --configuration Release
     - name: Test with dotnet
       run: dotnet test ./src/Checkout.PaymentGateway.sln --configuration Release
+    
