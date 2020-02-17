@@ -39,7 +39,7 @@ namespace Checkout.PaymentGateway.Api
                 var elapsed = timer.Elapsed;
 
                 Log.Debug("----------->>> ------------------- <<<-----------");
-                Log.Debug($"----------->>> Mediator Handled {typeof(TRequest).Name} in {elapsed.TotalMilliseconds:000} ms.<<<-----------");
+                Log.Debug($"----------->>> Mediator Handled {typeof(TRequest).Name} in {elapsed.TotalMilliseconds} ms.<<<-----------");
                 Log.Debug("----------->>> ------------------- <<<-----------");
 
                 return result;
