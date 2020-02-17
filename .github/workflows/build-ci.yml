@@ -1,0 +1,16 @@
+name: .NET Core build script
+
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.100
+    - name: build API
+      run: dotnet build ./src/Checkout.PaymentGateway.Api/Checkout.PaymentGateway.Api.csproj --configuration Release
+    - name: test project
+      run: dotnet test ./src/Checkout.PaymentGateway.Api.Tests/Checkout.PaymentGateway.Api.Tests.csproj
