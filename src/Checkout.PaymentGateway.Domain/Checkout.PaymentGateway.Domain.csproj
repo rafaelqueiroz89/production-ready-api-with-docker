@@ -4,4 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CreditCardValidator" Version="1.4.6" />
+    <PackageReference Include="FluentValidation" Version="8.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Checkout.PaymentGateway.Infrastructure.SeedWork\Checkout.PaymentGateway.Infrastructure.SeedWork.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,10 +1,14 @@
+using System.Reflection;
+
+using Checkout.PaymentGateway.CQRS.Commands;
+
+using FluentValidation.AspNetCore;
+
 using MediatR;
 
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace Checkout.PaymentGateway.Api
@@ -35,8 +39,10 @@ namespace Checkout.PaymentGateway.Api
         /// <param name="services">The services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMediatR(typeof(Startup));
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(opt =>
+            {
+                opt.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c => c.SwaggerDoc("v1",
@@ -49,6 +55,9 @@ namespace Checkout.PaymentGateway.Api
                         Name = "Rafael Queiroz"
                     }
                 }));
+
+            services.AddMediatR(typeof(RequestPaymentCommand).Assembly);
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(TimerPipeline<,>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +66,7 @@ namespace Checkout.PaymentGateway.Api
         /// </summary>
         /// <param name="app">The application.</param>
         /// <param name="env">The env.</param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -65,10 +74,7 @@ namespace Checkout.PaymentGateway.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Payment Gateway");
             });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseRouting();
             app.UseEndpoints(endpoints =>
