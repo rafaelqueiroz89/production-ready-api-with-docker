@@ -9,8 +9,8 @@ namespace Checkout.PaymentGateway.CQRS.Queries
     /// <summary>
     /// Retrieve Payment
     /// </summary>
-    /// <seealso cref="MediatR.IRequest{Checkout.PaymentGateway.Domain.PaymentAggregate.ResponsePaymentAggregate}" />
-    public class RetrievePaymentQuery : IRequest<ResponsePaymentAggregate>
+    /// <seealso cref="MediatR.IRequest{Checkout.PaymentGateway.Domain.PaymentAggregate.ResponsePayment}" />
+    public class RetrievePaymentQuery : IRequest<ResponsePayment>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RetrievePaymentQuery"/> class.

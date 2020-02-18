@@ -8,10 +8,10 @@ namespace Checkout.PaymentGateway.CQRS.Commands
     /// <summary>
     /// Request payment command
     /// </summary>
-    /// <seealso cref="MediatR.IRequest{Checkout.PaymentGateway.Domain.PaymentAggregate.ResponsePaymentAggregate}" />
-    public class RequestPaymentCommand : IRequest<ResponsePaymentAggregate>
+    /// <seealso cref="MediatR.IRequest{Checkout.PaymentGateway.Domain.PaymentAggregate.ResponsePayment}" />
+    public class RequestPaymentCommand : IRequest<ResponsePayment>
     {
-        public RequestPaymentCommand(RequestPaymentAggregate requestPaymentAggregate)
+        public RequestPaymentCommand(RequestPayment requestPaymentAggregate)
         {
             this.RequestPaymentAggregate = requestPaymentAggregate;
         }
@@ -22,6 +22,6 @@ namespace Checkout.PaymentGateway.CQRS.Commands
         /// <value>
         /// The request payment aggregate.
         /// </value>
-        public RequestPaymentAggregate RequestPaymentAggregate { get; private set; }
+        public RequestPayment RequestPaymentAggregate { get; private set; }
     }
 }

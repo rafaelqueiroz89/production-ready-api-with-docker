@@ -5,7 +5,7 @@ namespace Checkout.PaymentGateway.Domain.PaymentAggregate
     /// <summary>
     /// Response of the payment
     /// </summary>
-    public class ResponsePaymentAggregate
+    public class ResponsePayment
     {
         /// <summary>
         /// Gets or sets the payment code.
@@ -29,6 +29,6 @@ namespace Checkout.PaymentGateway.Domain.PaymentAggregate
         /// <value>
         /// The card information aggregate.
         /// </value>
-        public CardInfoAggregate CardInfoAggregate { get; set; }
+        public CardInfo CardInfoAggregate { get; set; }
     }
 }

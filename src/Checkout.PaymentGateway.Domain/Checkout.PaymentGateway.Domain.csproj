@@ -9,4 +9,8 @@
     <PackageReference Include="FluentValidation" Version="8.6.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Checkout.PaymentGateway.Infrastructure.SeedWork\Checkout.PaymentGateway.Infrastructure.SeedWork.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 
+using Checkout.PaymentGateway.Infrastructure.SeedWork;
+
 using CreditCardValidator;
 
 using FluentValidation;
@@ -11,7 +13,7 @@ namespace Checkout.PaymentGateway.Domain
     /// <summary>
     /// This class represents a payment aggregate
     /// </summary>
-    public class RequestPaymentAggregate
+    public class RequestPayment : IAggregateRoot
     {
         /// <summary>
         /// Gets or sets the amount.
@@ -35,14 +37,14 @@ namespace Checkout.PaymentGateway.Domain
         /// <value>
         /// The card.
         /// </value>
-        public CardInfoAggregate Card { get; set; }
+        public CardInfo Card { get; set; }
     }
 
     /// <summary>
     /// Validator for the request payment aggregate
     /// </summary>
-    /// <seealso cref="FluentValidation.AbstractValidator{Checkout.PaymentGateway.Domain.RequestPaymentAggregate}" />
-    public sealed class RequestPaymentAggregateValidator : AbstractValidator<RequestPaymentAggregate>
+    /// <seealso cref="FluentValidation.AbstractValidator{Checkout.PaymentGateway.Domain.RequestPayment}" />
+    public sealed class RequestPaymentAggregateValidator : AbstractValidator<RequestPayment>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestPaymentAggregateValidator"/> class.

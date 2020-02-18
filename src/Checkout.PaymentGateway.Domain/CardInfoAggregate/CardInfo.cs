@@ -1,17 +1,18 @@
 ﻿using Checkout.PaymentGateway.Domain.Extensions;
+using Checkout.PaymentGateway.Infrastructure.SeedWork;
 
 namespace Checkout.PaymentGateway.Domain
 {
     /// <summary>
     /// This is a card info aggregation
     /// </summary>
-    public class CardInfoAggregate
+    public class CardInfo : IAggregateRoot
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CardInfoAggregate"/> class.
+        /// Initializes a new instance of the <see cref="CardInfo"/> class.
         /// </summary>
         /// <param name="maskCardDetails">if set to <c>true</c> [mask card details].</param>
-        public CardInfoAggregate(bool maskCardDetails)
+        public CardInfo(bool maskCardDetails)
         {
             if (maskCardDetails)
             {
@@ -21,9 +22,9 @@ namespace Checkout.PaymentGateway.Domain
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CardInfoAggregate"/> class.
+        /// Initializes a new instance of the <see cref="CardInfo"/> class.
         /// </summary>
-        public CardInfoAggregate()
+        public CardInfo()
         {
         }
 

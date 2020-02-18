@@ -11,8 +11,8 @@ namespace Checkout.PaymentGateway.CQRS.Queries.Handlers
     /// <summary>
     /// Retrieve Payment, gets a previously processed payment
     /// </summary>
-    /// <seealso cref="MediatR.IRequestHandler{Checkout.PaymentGateway.CQRS.Queries.RetrievePaymentQuery, Checkout.PaymentGateway.Domain.PaymentAggregate.ResponsePaymentAggregate}" />
-    internal class RetrievePaymentQueryHandler : IRequestHandler<RetrievePaymentQuery, ResponsePaymentAggregate>
+    /// <seealso cref="MediatR.IRequestHandler{Checkout.PaymentGateway.CQRS.Queries.RetrievePaymentQuery, Checkout.PaymentGateway.Domain.PaymentAggregate.ResponsePayment}" />
+    internal class RetrievePaymentQueryHandler : IRequestHandler<RetrievePaymentQuery, ResponsePayment>
     {
         /// <summary>
         /// Handles the specified request.
@@ -22,7 +22,7 @@ namespace Checkout.PaymentGateway.CQRS.Queries.Handlers
         /// <returns></returns>
         /// <exception cref="ArgumentValidationException">One or more fields are wrong</exception>
         /// <exception cref="PaymentRefusedException">Payment refused</exception>
-        public Task<ResponsePaymentAggregate> Handle(RetrievePaymentQuery request, CancellationToken cancellationToken)
+        public Task<ResponsePayment> Handle(RetrievePaymentQuery request, CancellationToken cancellationToken)
         {
             throw new PaymentNotFoundException("Payment not found, maybe the code is wrong?");
         }
