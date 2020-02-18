@@ -1,25 +1,7 @@
-﻿using System;
-
-namespace Checkout.PaymentGateway.Domain
+﻿namespace Checkout.PaymentGateway.Domain
 {
-    public class PaymentAggregate
+    public class RequestPaymentAggregate
     {
-        /// <summary>
-        /// Gets or sets the payment status.
-        /// </summary>
-        /// <value>
-        /// The payment status.
-        /// </value>
-        public PaymentStatusTypes PaymentStatus { get; set; }
-
-        /// <summary>
-        /// Gets or sets the payment code.
-        /// </summary>
-        /// <value>
-        /// The payment code.
-        /// </value>
-        public Guid PaymentCode { get; set; }
-
         /// <summary>
         /// Gets or sets the amount.
         /// </summary>

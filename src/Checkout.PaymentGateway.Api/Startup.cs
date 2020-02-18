@@ -1,3 +1,5 @@
+using Checkout.PaymentGateway.CQRS.Commands;
+
 using MediatR;
 
 using Microsoft.AspNetCore.Builder;
@@ -35,7 +37,6 @@ namespace Checkout.PaymentGateway.Api
         /// <param name="services">The services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMediatR(typeof(Startup));
             services.AddControllers();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
@@ -49,6 +50,8 @@ namespace Checkout.PaymentGateway.Api
                         Name = "Rafael Queiroz"
                     }
                 }));
+
+            services.AddMediatR(typeof(RequestPaymentCommand).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

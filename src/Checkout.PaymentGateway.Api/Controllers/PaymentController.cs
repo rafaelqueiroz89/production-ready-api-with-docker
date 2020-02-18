@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using Checkout.PaymentGateway.CQRS.Commands;
+using Checkout.PaymentGateway.Domain;
+
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
@@ -48,9 +51,9 @@ namespace Checkout.PaymentGateway.Api.Controllers
         /// <param name="paymentId">The payment identifier.</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> PostPayment()
+        public async Task<ActionResult> PostPayment(RequestPaymentAggregate requestPaymentAggregate)
         {
-            return this.Ok();
+            return this.Ok(await this.mediator.Send(new RequestPaymentCommand(requestPaymentAggregate)));
         }
     }
 }
