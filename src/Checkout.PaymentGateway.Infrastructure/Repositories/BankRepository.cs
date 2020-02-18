@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using Checkout.PaymentGateway.Domain;
 using Checkout.PaymentGateway.Domain.Interfaces;
 using Checkout.PaymentGateway.Domain.PaymentAggregate;
 
@@ -50,9 +51,11 @@ namespace Checkout.PaymentGateway.Infrastructure
         /// <exception cref="System.NotImplementedException"></exception>
         public async Task<BankResponsePayment> RequestPaymentAsync()
         {
+            var randomStatus = new Random();
+
             return await Task.FromResult(new BankResponsePayment()
             {
-                PaymentStatus = Domain.PaymentStatusTypes.Successful,
+                PaymentStatus = (PaymentStatusTypes)randomStatus.Next(0, 1),
                 RequestCode = Guid.NewGuid()
             });
         }
