@@ -25,6 +25,14 @@ namespace Checkout.PaymentGateway.DataModel.Models
         public string CardNumber { get; set; }
 
         /// <summary>
+        /// Gets or sets the payment code.
+        /// </summary>
+        /// <value>
+        /// The payment code.
+        /// </value>
+        public Guid PaymentCode { get; set; }
+
+        /// <summary>
         /// Gets or sets the CVV.
         /// </summary>
         /// <value>
@@ -69,5 +77,13 @@ namespace Checkout.PaymentGateway.DataModel.Models
         /// The paymnent status code navigation.
         /// </value>
         public virtual PaymentStatus PaymnentStatusCodeNavigation { get; set; }
+
+        /// <summary>
+        /// Gets the code status.
+        /// </summary>
+        /// <value>
+        /// The code status.
+        /// </value>
+        public long CodeStatus { get; internal set; }
     }
 }
