@@ -33,16 +33,22 @@ namespace Checkout.PaymentGateway.Api
                 Log.Debug("----------->>> ------------------- <<<-----------");
 
                 var timer = Stopwatch.StartNew();
+                try
+                {
+                    return await next();
+                }
+                catch
+                {
+                    //just pass it over if an exception occurs
+                }
+                finally
+                {
+                    Log.Debug("----------->>> ------------------- <<<-----------");
+                    Log.Debug($"----------->>> Mediator Handled {typeof(TRequest).Name} in {timer.Elapsed.TotalMilliseconds} ms.<<<-----------");
+                    Log.Debug("----------->>> ------------------- <<<-----------");
+                }
 
-                var result = await next();
-
-                var elapsed = timer.Elapsed;
-
-                Log.Debug("----------->>> ------------------- <<<-----------");
-                Log.Debug($"----------->>> Mediator Handled {typeof(TRequest).Name} in {elapsed.TotalMilliseconds} ms.<<<-----------");
-                Log.Debug("----------->>> ------------------- <<<-----------");
-
-                return result;
+                return await next();
             }
 #else
 

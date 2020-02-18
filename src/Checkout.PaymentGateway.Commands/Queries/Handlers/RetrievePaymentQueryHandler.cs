@@ -24,7 +24,7 @@ namespace Checkout.PaymentGateway.CQRS.Queries.Handlers
         /// <exception cref="PaymentRefusedException">Payment refused</exception>
         public Task<ResponsePaymentAggregate> Handle(RetrievePaymentQuery request, CancellationToken cancellationToken)
         {
-            throw new PaymentNotFoundException("Payment doesn't exists");
+            throw new PaymentNotFoundException("Payment not found, maybe the code is wrong?");
         }
     }
 }

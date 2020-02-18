@@ -57,6 +57,7 @@ namespace Checkout.PaymentGateway.Api
                 }));
 
             services.AddMediatR(typeof(RequestPaymentCommand).Assembly);
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(TimerPipeline<,>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
