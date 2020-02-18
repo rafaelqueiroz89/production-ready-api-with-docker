@@ -1,4 +1,8 @@
+using System.Reflection;
+
 using Checkout.PaymentGateway.CQRS.Commands;
+
+using FluentValidation.AspNetCore;
 
 using MediatR;
 
@@ -35,7 +39,10 @@ namespace Checkout.PaymentGateway.Api
         /// <param name="services">The services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(opt =>
+            {
+                opt.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c => c.SwaggerDoc("v1",

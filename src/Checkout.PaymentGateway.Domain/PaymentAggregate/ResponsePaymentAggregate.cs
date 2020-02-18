@@ -2,6 +2,9 @@
 
 namespace Checkout.PaymentGateway.Domain.PaymentAggregate
 {
+    /// <summary>
+    /// Response of the payment
+    /// </summary>
     public class ResponsePaymentAggregate
     {
         /// <summary>
@@ -19,5 +22,13 @@ namespace Checkout.PaymentGateway.Domain.PaymentAggregate
         /// The payment status.
         /// </value>
         public PaymentStatusTypes PaymentStatus { get; set; }
+
+        /// <summary>
+        /// Gets or sets the card information aggregate.
+        /// </summary>
+        /// <value>
+        /// The card information aggregate.
+        /// </value>
+        public CardInfoAggregate CardInfoAggregate { get; set; }
     }
 }

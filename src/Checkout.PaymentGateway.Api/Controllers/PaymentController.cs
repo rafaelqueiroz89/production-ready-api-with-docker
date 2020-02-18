@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using Checkout.PaymentGateway.CQRS.Commands;
+using Checkout.PaymentGateway.CQRS.Queries;
 using Checkout.PaymentGateway.Domain;
 
 using MediatR;
@@ -37,12 +38,12 @@ namespace Checkout.PaymentGateway.Api.Controllers
         /// <summary>
         /// Gets the payment.
         /// </summary>
-        /// <param name="paymentId">The payment identifier.</param>
+        /// <param name="paymentCode">The payment identifier.</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult> GetPayment(Guid paymentId)
+        public async Task<ActionResult> GetPayment(Guid paymentCode)
         {
-            return this.Ok();
+            return this.Ok(await this.mediator.Send(new RetrievePaymentQuery(paymentCode)));
         }
 
         /// <summary>

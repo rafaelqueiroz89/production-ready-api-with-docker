@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
+
+using FluentValidation.Results;
 
 namespace Checkout.PaymentGateway.Domain.Exceptions
 {
@@ -10,6 +13,8 @@ namespace Checkout.PaymentGateway.Domain.Exceptions
     [Serializable]
     public class ArgumentValidationException : Exception
     {
+        public readonly IList<ValidationFailure> Errors;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentNotFoundException"/> class.
         /// </summary>
@@ -25,6 +30,16 @@ namespace Checkout.PaymentGateway.Domain.Exceptions
         /// <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
         public ArgumentValidationException(string message, Exception innerException) : base(message, innerException)
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArgumentValidationException"/> class.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="errors">The errors.</param>
+        public ArgumentValidationException(string message, IList<ValidationFailure> errors) : this(message)
+        {
+            this.Errors = errors;
         }
 
         /// <summary>

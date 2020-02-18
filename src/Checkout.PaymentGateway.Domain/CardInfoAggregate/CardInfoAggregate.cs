@@ -1,7 +1,32 @@
-﻿namespace Checkout.PaymentGateway.Domain
+﻿using Checkout.PaymentGateway.Domain.Extensions;
+
+namespace Checkout.PaymentGateway.Domain
 {
+    /// <summary>
+    /// This is a card info aggregation
+    /// </summary>
     public class CardInfoAggregate
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CardInfoAggregate"/> class.
+        /// </summary>
+        /// <param name="maskCardDetails">if set to <c>true</c> [mask card details].</param>
+        public CardInfoAggregate(bool maskCardDetails)
+        {
+            if (maskCardDetails)
+            {
+                this.CardNumber = this.CardNumber.Masked(0, 10);
+                this.Cvv = this.Cvv.Masked(0, 1);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CardInfoAggregate"/> class.
+        /// </summary>
+        public CardInfoAggregate()
+        {
+        }
+
         /// <summary>
         /// Gets or sets the card number.
         /// </summary>
@@ -40,6 +65,6 @@
         /// <value>
         /// The CVV.
         /// </value>
-        public int Cvv { get; set; }
+        public string Cvv { get; set; }
     }
 }

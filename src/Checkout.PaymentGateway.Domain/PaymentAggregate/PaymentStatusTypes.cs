@@ -1,5 +1,8 @@
 ﻿namespace Checkout.PaymentGateway.Domain
 {
+    /// <summary>
+    /// This enum represents all the status a payment can have
+    /// </summary>
     public enum PaymentStatusTypes
     {
         /// <summary>
