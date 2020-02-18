@@ -29,6 +29,6 @@ namespace Checkout.PaymentGateway.Domain.PaymentAggregate
         /// <value>
         /// The card information aggregate.
         /// </value>
-        public CardInfo CardInfoAggregate { get; set; }
+        public CardIndfo CardInfoAggregate { get; set; }
     }
 }
