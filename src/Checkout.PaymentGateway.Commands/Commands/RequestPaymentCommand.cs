@@ -9,7 +9,7 @@ namespace Checkout.PaymentGateway.CQRS.Commands
     /// Request payment command
     /// </summary>
     /// <seealso cref="MediatR.IRequest{Checkout.PaymentGateway.Domain.PaymentAggregate.Payment}" />
-    public class RequestPaymentCommand : IRequest<Payment>
+    public class RequestPaymentCommand : IRequest<BankResponsePayment>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestPaymentCommand"/> class.

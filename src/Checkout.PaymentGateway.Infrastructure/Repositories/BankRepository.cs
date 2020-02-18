@@ -43,9 +43,18 @@ namespace Checkout.PaymentGateway.Infrastructure
             GC.SuppressFinalize(this);
         }
 
-        public Task<BankResponsePayment> RequestPayment()
+        /// <summary>
+        /// Requests the payment to the bank, we should change the implementation here to retrieve from a real source
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public async Task<BankResponsePayment> RequestPaymentAsync()
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(new BankResponsePayment()
+            {
+                PaymentStatus = Domain.PaymentStatusTypes.Successful,
+                RequestCode = Guid.NewGuid()
+            });
         }
     }
 }

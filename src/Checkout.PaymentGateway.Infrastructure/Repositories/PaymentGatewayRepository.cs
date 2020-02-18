@@ -26,17 +26,7 @@ namespace Checkout.PaymentGateway.Infrastructure
         /// <summary>
         /// The unit of work
         /// </summary>
-        //private readonly IMisDbContextUnitOfWork unitOfWork;
-
-        public Task<Payment> GetPayment(Guid paymentCode)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task RequestPayment(RequestPayment requestPayment)
-        {
-            throw new NotImplementedException();
-        }
+        //private readonly IMisDbContextUnitOfWork unitOfWork
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
@@ -66,6 +56,16 @@ namespace Checkout.PaymentGateway.Infrastructure
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public Task AddPaymentAsync(RequestPayment requestPayment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Payment> GetPaymentAsync(Guid paymentCode)
+        {
+            throw new NotImplementedException();
         }
     }
 }

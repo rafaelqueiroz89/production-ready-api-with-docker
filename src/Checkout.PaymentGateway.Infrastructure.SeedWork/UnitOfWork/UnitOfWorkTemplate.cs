@@ -19,7 +19,6 @@ namespace Checkout.PaymentGateway.Infrastructure.SeedWork
         protected UnitOfWorkTemplate(T context)
         {
             this.disposed = false;
-
             this.Context = context;
         }
 
@@ -39,7 +38,7 @@ namespace Checkout.PaymentGateway.Infrastructure.SeedWork
         /// Performs application-defined tasks associated with freeing, releasing, or resetting
         /// unmanaged resources.
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);
