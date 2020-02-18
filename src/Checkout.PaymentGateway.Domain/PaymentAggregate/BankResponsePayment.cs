@@ -1,19 +1,22 @@
 ﻿using System;
 
+using Checkout.PaymentGateway.Infrastructure.SeedWork;
+
 namespace Checkout.PaymentGateway.Domain.PaymentAggregate
 {
     /// <summary>
-    /// Response of the payment
+    /// Domain object from the bank
     /// </summary>
-    public class ResponsePayment
+    /// <seealso cref="Checkout.PaymentGateway.Infrastructure.SeedWork.IAggregateRoot" />
+    public class BankResponsePayment : IAggregateRoot
     {
         /// <summary>
-        /// Gets or sets the payment code.
+        /// Gets or sets the request code.
         /// </summary>
         /// <value>
-        /// The payment code.
+        /// The request code.
         /// </value>
-        public Guid PaymentCode { get; set; }
+        public Guid RequestCode { get; set; }
 
         /// <summary>
         /// Gets or sets the payment status.
@@ -22,13 +25,5 @@ namespace Checkout.PaymentGateway.Domain.PaymentAggregate
         /// The payment status.
         /// </value>
         public PaymentStatusTypes PaymentStatus { get; set; }
-
-        /// <summary>
-        /// Gets or sets the card information aggregate.
-        /// </summary>
-        /// <value>
-        /// The card information aggregate.
-        /// </value>
-        public CardInfo CardInfoAggregate { get; set; }
     }
 }

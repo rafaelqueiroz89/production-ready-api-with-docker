@@ -1,6 +1,8 @@
 using System.Reflection;
 
 using Checkout.PaymentGateway.CQRS.Commands;
+using Checkout.PaymentGateway.Domain.Interfaces;
+using Checkout.PaymentGateway.Infrastructure;
 
 using FluentValidation.AspNetCore;
 
@@ -58,9 +60,10 @@ namespace Checkout.PaymentGateway.Api
 
             services.AddMediatR(typeof(RequestPaymentCommand).Assembly);
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(TimerPipeline<,>));
+            services.AddScoped<IPaymentGatewayRepository, PaymentGatewayRepository>();
+            services.AddScoped<IBankRepository, BankRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// <summary>
         /// Configures the specified application.
         /// </summary>
