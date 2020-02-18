@@ -17,7 +17,6 @@ namespace Checkout.PaymentGateway.Domain
             if (maskCardDetails)
             {
                 this.CardNumber = this.CardNumber.Masked(0, 10);
-                this.Cvv = this.Cvv.Masked(0, 1);
             }
         }
 
@@ -66,6 +65,6 @@ namespace Checkout.PaymentGateway.Domain
         /// <value>
         /// The CVV.
         /// </value>
-        public string Cvv { get; set; }
+        public int Cvv { get; set; }
     }
 }

@@ -1,14 +1,17 @@
 using System.Reflection;
 
 using Checkout.PaymentGateway.CQRS.Commands;
+using Checkout.PaymentGateway.DataModel;
 using Checkout.PaymentGateway.Domain.Interfaces;
 using Checkout.PaymentGateway.Infrastructure;
+using Checkout.PaymentGateway.Infrastructure.Database;
 
 using FluentValidation.AspNetCore;
 
 using MediatR;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -62,6 +65,10 @@ namespace Checkout.PaymentGateway.Api
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(TimerPipeline<,>));
             services.AddScoped<IPaymentGatewayRepository, PaymentGatewayRepository>();
             services.AddScoped<IBankRepository, BankRepository>();
+            services.AddTransient(typeof(PaymentGatewayContext));
+            services.AddScoped<IPaymentGatewayDbContextUnitOfWork, PaymentGatewayDbContextUnitOfWork>();
+
+            services.AddDbContext<PaymentGatewayContext>(options => options.UseInMemoryDatabase(databaseName: "PaymentGatewaySvc"));
         }
 
         /// <summary>

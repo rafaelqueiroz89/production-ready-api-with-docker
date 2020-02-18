@@ -54,7 +54,7 @@ namespace Checkout.PaymentGateway.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> RequestPayment(RequestPayment requestPaymentAggregate)
         {
-            return this.Ok(await this.mediator.Send(new RequestPaymentCommand(requestPaymentAggregate)));
+            return this.Accepted(await this.mediator.Send(new RequestPaymentCommand(requestPaymentAggregate)));
         }
     }
 }

@@ -61,7 +61,7 @@ namespace Checkout.PaymentGateway.Domain
 
             this.RuleFor(r => r.CurrencyCode).Length(3).NotEmpty();
 
-            this.RuleFor(r => Convert.ToInt32(r.Card.Cvv)).InclusiveBetween(100, 9999);
+            this.RuleFor(r => r.Card.Cvv).InclusiveBetween(100, 9999);
         }
 
         /// <summary>
