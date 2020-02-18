@@ -3,10 +3,8 @@ using Checkout.PaymentGateway.CQRS.Commands;
 using MediatR;
 
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace Checkout.PaymentGateway.Api
@@ -60,7 +58,7 @@ namespace Checkout.PaymentGateway.Api
         /// </summary>
         /// <param name="app">The application.</param>
         /// <param name="env">The env.</param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -68,10 +66,7 @@ namespace Checkout.PaymentGateway.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Payment Gateway");
             });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseRouting();
             app.UseEndpoints(endpoints =>

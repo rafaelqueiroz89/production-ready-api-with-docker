@@ -46,12 +46,12 @@ namespace Checkout.PaymentGateway.Api.Controllers
         }
 
         /// <summary>
-        /// Posts the payment.
+        /// Requests a payment.
         /// </summary>
-        /// <param name="paymentId">The payment identifier.</param>
+        /// <param name="requestPaymentAggregate">The request payment aggregate.</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> PostPayment(RequestPaymentAggregate requestPaymentAggregate)
+        public async Task<ActionResult> RequestPayment(RequestPaymentAggregate requestPaymentAggregate)
         {
             return this.Ok(await this.mediator.Send(new RequestPaymentCommand(requestPaymentAggregate)));
         }

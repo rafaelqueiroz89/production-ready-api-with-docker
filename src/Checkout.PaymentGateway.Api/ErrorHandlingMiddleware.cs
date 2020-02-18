@@ -4,6 +4,8 @@
     using System.Net;
     using System.Threading.Tasks;
 
+    using Checkout.PaymentGateway.Domain.Exceptions;
+
     using Microsoft.AspNetCore.Http;
 
     using Newtonsoft.Json;
@@ -46,7 +48,18 @@
         /// <returns></returns>
         private Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
-            var code = HttpStatusCode.InternalServerError; // 500 if unexpected
+            var code = HttpStatusCode.BadRequest;
+
+            switch (ex.GetType().Name)
+            {
+                case nameof(PaymentNotFoundException):
+                    code = HttpStatusCode.NotFound;
+                    break;
+
+                case nameof(PaymentRefusedException):
+                    code = HttpStatusCode.Unauthorized;
+                    break;
+            }
 
             var result = JsonConvert.SerializeObject(new
             {
