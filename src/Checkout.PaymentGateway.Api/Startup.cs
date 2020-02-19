@@ -16,6 +16,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
+using Prometheus;
+
 namespace Checkout.PaymentGateway.Api
 {
     public class Startup
@@ -79,6 +81,16 @@ namespace Checkout.PaymentGateway.Api
         /// <param name="env">The env.</param>
         public void Configure(IApplicationBuilder app)
         {
+            // Custom Metrics to count requests for each endpoint and the method
+            var counter = Metrics.CreateCounter("gatewayapi_path_counter", "Counts requests", new CounterConfiguration
+            {
+                LabelNames = new[] { "method", "endpoint" }
+            }); app.Use((context, next) =>
+            {
+                counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+                return next();
+            });
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -92,6 +104,9 @@ namespace Checkout.PaymentGateway.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseHttpMetrics();
+            app.UseMetricServer();
         }
     }
 }
