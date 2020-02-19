@@ -2,6 +2,8 @@
 
 using Checkout.PaymentGateway.Infrastructure.SeedWork;
 
+using Newtonsoft.Json;
+
 namespace Checkout.PaymentGateway.Domain.PaymentAggregate
 {
     /// <summary>
@@ -10,6 +12,15 @@ namespace Checkout.PaymentGateway.Domain.PaymentAggregate
     /// <seealso cref="Checkout.PaymentGateway.Infrastructure.SeedWork.IAggregateRoot" />
     public class BankResponsePayment : IAggregateRoot
     {
+        /// <summary>
+        /// Gets or sets the bank request code.
+        /// </summary>
+        /// <value>
+        /// The bank request code.
+        /// </value>
+        [JsonIgnore]
+        public Guid BankRequestCode { get; set; }
+
         /// <summary>
         /// Gets or sets the request code.
         /// </summary>
@@ -24,6 +35,7 @@ namespace Checkout.PaymentGateway.Domain.PaymentAggregate
         /// <value>
         /// The payment status.
         /// </value>
+
         public PaymentStatusTypes PaymentStatus { get; set; }
     }
 }

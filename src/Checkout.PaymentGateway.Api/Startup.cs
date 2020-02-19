@@ -47,7 +47,7 @@ namespace Checkout.PaymentGateway.Api
             services.AddControllers().AddFluentValidation(opt =>
             {
                 opt.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            });
+            }).AddNewtonsoftJson();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c => c.SwaggerDoc("v1",
@@ -68,7 +68,8 @@ namespace Checkout.PaymentGateway.Api
             services.AddTransient(typeof(PaymentGatewayContext));
             services.AddScoped<IPaymentGatewayDbContextUnitOfWork, PaymentGatewayDbContextUnitOfWork>();
 
-            services.AddDbContext<PaymentGatewayContext>(options => options.UseInMemoryDatabase(databaseName: "PaymentGatewaySvc"));
+            services.AddDbContext<PaymentGatewayContext>(options =>
+                                                         options.UseInMemoryDatabase(databaseName: "PaymentGatewaySvc"));
         }
 
         /// <summary>

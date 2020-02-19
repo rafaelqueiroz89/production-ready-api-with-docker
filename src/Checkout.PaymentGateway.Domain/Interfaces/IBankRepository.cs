@@ -13,6 +13,6 @@ namespace Checkout.PaymentGateway.Domain.Interfaces
         /// Requests the payment.
         /// </summary>
         /// <returns></returns>
-        Task<BankResponsePayment> RequestPaymentAsync();
+        Task<BankResponsePayment> RequestPaymentAsync(RequestPayment requestPayment);
     }
 }

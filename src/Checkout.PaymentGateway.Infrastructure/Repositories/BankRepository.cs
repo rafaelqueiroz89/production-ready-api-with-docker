@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Checkout.PaymentGateway.Domain;
 using Checkout.PaymentGateway.Domain.Interfaces;
 using Checkout.PaymentGateway.Domain.PaymentAggregate;
+using Checkout.PaymentGateway.Infrastructure.Database;
 
 namespace Checkout.PaymentGateway.Infrastructure
 {
@@ -13,6 +14,20 @@ namespace Checkout.PaymentGateway.Infrastructure
         /// The dispoed
         /// </summary>
         private bool disposed;
+
+        /// <summary>
+        /// The unit of work
+        /// </summary>
+        private readonly IPaymentGatewayDbContextUnitOfWork unitOfWork;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BankRepository"/> class.
+        /// </summary>
+        /// <param name="unitOfWork">The unit of work.</param>
+        public BankRepository(IPaymentGatewayDbContextUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
@@ -28,7 +43,7 @@ namespace Checkout.PaymentGateway.Infrastructure
 
             if (disposing)
             {
-                //this.unitOfWork.Context.Dispose();
+                this.unitOfWork.Context.Dispose();
             }
 
             this.disposed = true;
@@ -45,18 +60,18 @@ namespace Checkout.PaymentGateway.Infrastructure
         }
 
         /// <summary>
-        /// Requests the payment to the bank, we should change the implementation here to retrieve from a real source
+        /// Requests the payment.
         /// </summary>
+        /// <param name="requestPayment"></param>
         /// <returns></returns>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public async Task<BankResponsePayment> RequestPaymentAsync()
+        public async Task<BankResponsePayment> RequestPaymentAsync(RequestPayment requestPayment)
         {
             var randomStatus = new Random();
 
             return await Task.FromResult(new BankResponsePayment()
             {
-                PaymentStatus = (PaymentStatusTypes)randomStatus.Next(0, 1),
-                RequestCode = Guid.NewGuid()
+                PaymentStatus = (PaymentStatusTypes)randomStatus.Next(0, 2), //this will return either Success or Unsuccess
+                BankRequestCode = Guid.NewGuid()
             });
         }
     }

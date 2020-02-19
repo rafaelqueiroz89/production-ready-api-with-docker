@@ -18,13 +18,13 @@ namespace Checkout.PaymentGateway.CQRS.Commands.Handlers
     /// <seealso cref="MediatR.IRequestHandler{Checkout.PaymentGateway.CQRS.Commands.RequestPaymentCommand, Checkout.PaymentGateway.Domain.PaymentAggregate.Payment}" />
     internal class RequestPaymentCommandHandler : IRequestHandler<RequestPaymentCommand, BankResponsePayment>
     {
-        private readonly IBankRepository _bankRepository;
-        private readonly IPaymentGatewayRepository _paymentGatewayRepository;
+        private readonly IBankRepository bankRepository;
+        private readonly IPaymentGatewayRepository paymentGatewayRepository;
 
         public RequestPaymentCommandHandler(IBankRepository bankRepository, IPaymentGatewayRepository paymentGatewayRepository)
         {
-            this._bankRepository = bankRepository;
-            this._paymentGatewayRepository = paymentGatewayRepository;
+            this.bankRepository = bankRepository;
+            this.paymentGatewayRepository = paymentGatewayRepository;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Checkout.PaymentGateway.CQRS.Commands.Handlers
         public async Task<BankResponsePayment> Handle(RequestPaymentCommand request, CancellationToken cancellationToken)
         {
             RequestPaymentAggregateValidator validator = new RequestPaymentAggregateValidator();
-            ValidationResult result = validator.Validate(request.RequestPaymentAggregate);
+            ValidationResult result = validator.Validate(request.RequestPayment);
 
             if (!result.IsValid)
             {
@@ -45,22 +45,17 @@ namespace Checkout.PaymentGateway.CQRS.Commands.Handlers
             }
             else
             {
-                ////save payment with status pending
-                //var requestPayment = await this._paymentGatewayRepository.AddPaymentAsync;
+                //save payment
+                var paymentCode = await this.paymentGatewayRepository.AddPaymentAsync(request.RequestPayment);
 
-                ////change status according to the call to the bank's API
-                //requestPayment = await this._bankRepository.RequestPaymentAsync();
+                //change status according to the call to the bank's API
+                var response = await this.bankRepository.RequestPaymentAsync(request.RequestPayment);
+                response.RequestCode = paymentCode;
 
-                //if (requestPayment.PaymentStatus == PaymentStatusTypes.Unsuccessful)
-                //{
-                //    throw new PaymentRefusedException("Payment refused");
-                //}
-                //else
-                //{
-                //    return requestPayment;
-                //}
+                //update with the transaction code + status with what is returned from the bank and update entries in database
+                await this.paymentGatewayRepository.UpdatePaymentAsync(paymentCode, response.PaymentStatus, response.BankRequestCode);
 
-                return null;
+                return response;
             }
         }
     }

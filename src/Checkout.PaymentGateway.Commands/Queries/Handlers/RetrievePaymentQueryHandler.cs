@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using Checkout.PaymentGateway.Domain.Exceptions;
+using Checkout.PaymentGateway.Domain.Interfaces;
 using Checkout.PaymentGateway.Domain.PaymentAggregate;
 
 using MediatR;
@@ -14,6 +15,17 @@ namespace Checkout.PaymentGateway.CQRS.Queries.Handlers
     /// <seealso cref="MediatR.IRequestHandler{Checkout.PaymentGateway.CQRS.Queries.RetrievePaymentQuery, Checkout.PaymentGateway.Domain.PaymentAggregate.Payment}" />
     internal class RetrievePaymentQueryHandler : IRequestHandler<RetrievePaymentQuery, Payment>
     {
+        private readonly IPaymentGatewayRepository paymentGatewayRepository;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RetrievePaymentQueryHandler"/> class.
+        /// </summary>
+        /// <param name="paymentGatewayRepository">The payment gateway repository.</param>
+        public RetrievePaymentQueryHandler(IPaymentGatewayRepository paymentGatewayRepository)
+        {
+            this.paymentGatewayRepository = paymentGatewayRepository;
+        }
+
         /// <summary>
         /// Handles the specified request.
         /// </summary>
@@ -22,9 +34,9 @@ namespace Checkout.PaymentGateway.CQRS.Queries.Handlers
         /// <returns></returns>
         /// <exception cref="ArgumentValidationException">One or more fields are wrong</exception>
         /// <exception cref="PaymentRefusedException">Payment refused</exception>
-        public Task<Payment> Handle(RetrievePaymentQuery request, CancellationToken cancellationToken)
+        public async Task<Payment> Handle(RetrievePaymentQuery request, CancellationToken cancellationToken)
         {
-            throw new PaymentNotFoundException("Payment not found, maybe the code is wrong?");
+            return await this.paymentGatewayRepository.GetPaymentAsync(request.PaymentCode);
         }
     }
 }

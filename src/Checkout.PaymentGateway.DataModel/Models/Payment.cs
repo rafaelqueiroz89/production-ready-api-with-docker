@@ -2,8 +2,14 @@
 
 namespace Checkout.PaymentGateway.DataModel.Models
 {
+    /// <summary>
+    /// Payment model
+    /// </summary>
     public partial class Payment
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Payment"/> class.
+        /// </summary>
         public Payment()
         {
             this.DateCreated = DateTime.Now;
@@ -84,6 +90,16 @@ namespace Checkout.PaymentGateway.DataModel.Models
         /// <value>
         /// The code status.
         /// </value>
-        public long CodeStatus { get; internal set; }
+        public long CodeStatus { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name { get; set; }
+
+        public Guid BankPaymentCode { get; set; }
     }
 }

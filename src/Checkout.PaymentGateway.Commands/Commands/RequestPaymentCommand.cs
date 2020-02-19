@@ -15,9 +15,9 @@ namespace Checkout.PaymentGateway.CQRS.Commands
         /// Initializes a new instance of the <see cref="RequestPaymentCommand"/> class.
         /// </summary>
         /// <param name="requestPaymentAggregate">The request payment aggregate.</param>
-        public RequestPaymentCommand(RequestPayment requestPaymentAggregate)
+        public RequestPaymentCommand(RequestPayment requestPayment)
         {
-            this.RequestPaymentAggregate = requestPaymentAggregate;
+            this.RequestPayment = requestPayment;
         }
 
         /// <summary>
@@ -26,6 +26,6 @@ namespace Checkout.PaymentGateway.CQRS.Commands
         /// <value>
         /// The request payment aggregate.
         /// </value>
-        public RequestPayment RequestPaymentAggregate { get; private set; }
+        public RequestPayment RequestPayment { get; private set; }
     }
 }

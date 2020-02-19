@@ -53,16 +53,12 @@ namespace Checkout.PaymentGateway.DataModel
             {
                 entity.HasKey(x => x.Id);
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                entity.Property(e => e.DateCreated).HasField("datetime2(3)");
-                entity.Property(e => e.DateModified).HasField("datetime2(3)");
             });
 
             modelBuilder.Entity<Payment>(entity =>
             {
                 entity.HasKey(x => x.Id);
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                entity.Property(e => e.DateCreated).HasField("datetime2(3)");
-                entity.Property(e => e.DateModified).HasField("datetime2(3)");
                 entity.HasOne(e => e.PaymnentStatusCodeNavigation)
                             .WithMany(e => e.Payment)
                             .HasPrincipalKey(e => e.Id)
@@ -74,6 +70,7 @@ namespace Checkout.PaymentGateway.DataModel
             modelBuilder.Entity<PaymentStatus>()
                 .HasData(new PaymentStatus
                 {
+                    Id = 1,
                     Code = (int)PaymentStatusTypes.Successful,
                     Name = "Successful"
                 });
@@ -81,9 +78,18 @@ namespace Checkout.PaymentGateway.DataModel
             modelBuilder.Entity<PaymentStatus>()
                 .HasData(new PaymentStatus
                 {
+                    Id = 2,
                     Code = (int)PaymentStatusTypes.Unsuccessful,
                     Name = "Unsuccessful"
                 });
+
+            modelBuilder.Entity<PaymentStatus>()
+               .HasData(new PaymentStatus
+               {
+                   Id = 3,
+                   Code = (int)PaymentStatusTypes.Pending,
+                   Name = "Pending"
+               });
         }
     }
 }
