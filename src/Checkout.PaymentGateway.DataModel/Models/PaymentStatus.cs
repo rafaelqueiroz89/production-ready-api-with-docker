@@ -13,14 +13,14 @@ namespace Checkout.PaymentGateway.DataModel.Models
             this.DateCreated = DateTime.Now;
             this.DateModified = DateTime.Now;
 
-            this.Payment = new HashSet<Payment>();
+            this.Payment = new HashSet<PaymentRequest>();
         }
 
         /// <summary>
         /// Gets or sets the approved position.
         /// </summary>
         /// <value>The approved position.</value>
-        public ICollection<Payment> Payment { get; set; }
+        public ICollection<PaymentRequest> Payment { get; set; }
 
         /// <summary>
         /// Gets or sets the code.

@@ -6,6 +6,7 @@ using Checkout.PaymentGateway.Domain;
 using Checkout.PaymentGateway.Domain.Exceptions;
 using Checkout.PaymentGateway.Domain.Extensions;
 using Checkout.PaymentGateway.Domain.Interfaces;
+using Checkout.PaymentGateway.Domain.PaymentAggregate;
 using Checkout.PaymentGateway.Infrastructure.Database;
 
 using Model = Checkout.PaymentGateway.DataModel.Models;
@@ -76,7 +77,7 @@ namespace Checkout.PaymentGateway.Infrastructure
         /// <exception cref="System.NotImplementedException"></exception>
         public async Task<Guid> AddPaymentAsync(RequestPayment requestPayment)
         {
-            var payment = new Model.Payment();
+            var payment = new Model.PaymentRequest();
             payment.CardNumber = requestPayment.Card.CardNumber;
             payment.CodeStatus = (int)PaymentStatusTypes.Pending;
             payment.Cvv = requestPayment.Card.Cvv.ToString();
@@ -85,7 +86,7 @@ namespace Checkout.PaymentGateway.Infrastructure
             payment.ExpiryYear = requestPayment.Card.ExpiryYear;
             payment.PaymentCode = Guid.NewGuid(); //this will be changed to the code provided by the bank, this is temporary
 
-            await this.unitOfWork.Context.Payment.AddAsync(payment);
+            await this.unitOfWork.Context.PaymentRequest.AddAsync(payment);
             await this.unitOfWork.CommitAsync();
 
             return payment.PaymentCode;
@@ -99,7 +100,7 @@ namespace Checkout.PaymentGateway.Infrastructure
         /// <exception cref="System.NotImplementedException"></exception>
         public async Task UpdatePaymentAsync(Guid internalPaymentCode, PaymentStatusTypes paymentStatus, Guid bankPaymentCode)
         {
-            var item = (from payment in this.unitOfWork.Context.Payment
+            var item = (from payment in this.unitOfWork.Context.PaymentRequest
                         where payment.PaymentCode == internalPaymentCode
                         select payment).FirstOrDefault();
 
@@ -112,7 +113,7 @@ namespace Checkout.PaymentGateway.Infrastructure
                 item.BankPaymentCode = bankPaymentCode;
                 item.CodeStatus = (long)paymentStatus;
 
-                this.unitOfWork.Context.Payment.Update(item);
+                this.unitOfWork.Context.PaymentRequest.Update(item);
                 await this.unitOfWork.CommitAsync();
             }
         }
@@ -123,9 +124,9 @@ namespace Checkout.PaymentGateway.Infrastructure
         /// <param name="paymentCode"></param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public async Task<Domain.PaymentAggregate.Payment> GetPaymentAsync(Guid paymentCode)
+        public async Task<Payment> GetPaymentAsync(Guid paymentCode)
         {
-            var item = await Task.FromResult((from payment in this.unitOfWork.Context.Payment
+            var item = await Task.FromResult((from payment in this.unitOfWork.Context.PaymentRequest
                                               where payment.PaymentCode == paymentCode
                                               select payment).FirstOrDefault());
 
@@ -135,7 +136,7 @@ namespace Checkout.PaymentGateway.Infrastructure
             }
             else
             {
-                return new Domain.PaymentAggregate.Payment
+                return new Payment
                 {
                     PaymentCode = item.PaymentCode,
                     PaymentStatus = (PaymentStatusTypes)item.CodeStatus,

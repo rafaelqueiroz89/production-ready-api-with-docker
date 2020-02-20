@@ -5,12 +5,12 @@ namespace Checkout.PaymentGateway.DataModel.Models
     /// <summary>
     /// Payment model
     /// </summary>
-    public partial class Payment
+    public partial class PaymentRequest
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Payment"/> class.
+        /// Initializes a new instance of the <see cref="PaymentRequest"/> class.
         /// </summary>
-        public Payment()
+        public PaymentRequest()
         {
             this.DateCreated = DateTime.Now;
             this.DateModified = DateTime.Now;
@@ -100,6 +100,12 @@ namespace Checkout.PaymentGateway.DataModel.Models
         /// </value>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the bank payment code.
+        /// </summary>
+        /// <value>
+        /// The bank payment code.
+        /// </value>
         public Guid BankPaymentCode { get; set; }
     }
 }

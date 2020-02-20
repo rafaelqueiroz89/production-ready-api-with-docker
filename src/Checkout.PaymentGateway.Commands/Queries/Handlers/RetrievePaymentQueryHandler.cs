@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Checkout.PaymentGateway.Domain.Exceptions;
@@ -6,6 +7,8 @@ using Checkout.PaymentGateway.Domain.Interfaces;
 using Checkout.PaymentGateway.Domain.PaymentAggregate;
 
 using MediatR;
+
+[assembly: InternalsVisibleTo("Checkout.PaymentGateway.Api.Tests")]
 
 namespace Checkout.PaymentGateway.CQRS.Queries.Handlers
 {

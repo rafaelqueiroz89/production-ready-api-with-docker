@@ -17,7 +17,7 @@ namespace Checkout.PaymentGateway.DataModel
         /// <value>
         /// The payment.
         /// </value>
-        public virtual DbSet<Payment> Payment { get; set; }
+        public virtual DbSet<PaymentRequest> PaymentRequest { get; set; }
 
         /// <summary>
         /// Gets or sets the payment status.
@@ -55,7 +55,7 @@ namespace Checkout.PaymentGateway.DataModel
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
-            modelBuilder.Entity<Payment>(entity =>
+            modelBuilder.Entity<PaymentRequest>(entity =>
             {
                 entity.HasKey(x => x.Id);
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();

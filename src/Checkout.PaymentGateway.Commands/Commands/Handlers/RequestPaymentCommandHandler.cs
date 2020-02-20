@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Checkout.PaymentGateway.Domain;
@@ -9,6 +10,8 @@ using Checkout.PaymentGateway.Domain.PaymentAggregate;
 using FluentValidation.Results;
 
 using MediatR;
+
+[assembly: InternalsVisibleTo("Checkout.PaymentGateway.Api.Tests")]
 
 namespace Checkout.PaymentGateway.CQRS.Commands.Handlers
 {
