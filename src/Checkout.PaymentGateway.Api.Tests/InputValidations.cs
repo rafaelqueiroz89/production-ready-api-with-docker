@@ -26,7 +26,7 @@ namespace Checkout.PaymentGateway.Api.Tests
             ValidationResult result;
 
             //Act
-            result = this.requestPaymentAggregateValidator.Validate(this.fakeInvalidValidRequestPayment());
+            result = this.requestPaymentAggregateValidator.Validate(this.FakeInvalidValidRequestPayment());
 
             //Assert
             Assert.NotEmpty(result.Errors);
@@ -39,7 +39,7 @@ namespace Checkout.PaymentGateway.Api.Tests
             ValidationResult result;
 
             //Act
-            result = this.requestPaymentAggregateValidator.Validate(this.fakeValidRequestPayment());
+            result = this.requestPaymentAggregateValidator.Validate(this.FakeValidRequestPayment());
 
             //Assert
             Assert.Empty(result.Errors);
@@ -52,7 +52,7 @@ namespace Checkout.PaymentGateway.Api.Tests
         {
             //Arrange
             ValidationResult result;
-            var request = this.fakeValidRequestPayment();
+            var request = this.FakeValidRequestPayment();
             request.Card.Cvv = cvv.ToString();
 
             //Act
@@ -70,7 +70,7 @@ namespace Checkout.PaymentGateway.Api.Tests
             //Arrange
             ValidationResult result;
             CreditCardDetector creditCardDetector;
-            var request = this.fakeValidRequestPayment();
+            var request = this.FakeValidRequestPayment();
             request.Card.CardNumber = cardNumber;
 
             //Act
@@ -88,7 +88,7 @@ namespace Checkout.PaymentGateway.Api.Tests
         {
             //Arrange
             ValidationResult result;
-            var request = this.fakeValidRequestPayment();
+            var request = this.FakeValidRequestPayment();
             request.Card.ExpiryMonth = month;
 
             //Act
@@ -107,10 +107,8 @@ namespace Checkout.PaymentGateway.Api.Tests
             var input = DateTime.Now.Year + year;
 
             ValidationResult result;
-            var request = this.fakeValidRequestPayment();
+            var request = this.FakeValidRequestPayment();
             request.Card.ExpiryYear = input;
-
-            var request_ = this.fakeValidRequestPayment();
             request.Card.ExpiryYear = DateTime.Now.Year - 2;
 
             //Act
@@ -126,7 +124,7 @@ namespace Checkout.PaymentGateway.Api.Tests
         {
             //Arrange
             ValidationResult result;
-            var request = this.fakeValidRequestPayment();
+            var request = this.FakeValidRequestPayment();
             request.Card.Name = cardName;
 
             //Act
@@ -143,7 +141,7 @@ namespace Checkout.PaymentGateway.Api.Tests
         {
             //Arrange
             ValidationResult result;
-            var request = this.fakeValidRequestPayment();
+            var request = this.FakeValidRequestPayment();
             request.Amount = amount;
 
             //Act
@@ -161,7 +159,7 @@ namespace Checkout.PaymentGateway.Api.Tests
         {
             //Arrange
             ValidationResult result;
-            var request = this.fakeValidRequestPayment();
+            var request = this.FakeValidRequestPayment();
             request.CurrencyCode = currency;
 
             //Act
@@ -171,9 +169,7 @@ namespace Checkout.PaymentGateway.Api.Tests
             Assert.NotEmpty(result.Errors);
         }
 
-        #region fake data
-
-        private RequestPayment fakeValidRequestPayment()
+        private RequestPayment FakeValidRequestPayment()
         {
             return new RequestPayment()
             {
@@ -190,7 +186,7 @@ namespace Checkout.PaymentGateway.Api.Tests
             };
         }
 
-        private RequestPayment fakeInvalidValidRequestPayment()
+        private RequestPayment FakeInvalidValidRequestPayment()
         {
             return new RequestPayment()
             {
@@ -206,7 +202,5 @@ namespace Checkout.PaymentGateway.Api.Tests
                 CurrencyCode = "USD"
             };
         }
-
-        #endregion fake data
     }
 }

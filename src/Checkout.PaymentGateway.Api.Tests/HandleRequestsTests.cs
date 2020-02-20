@@ -29,9 +29,9 @@ namespace Checkout.PaymentGateway.Api.Tests
         public async Task GetPaymentDbReturnsAPaymentWithStatusPending()
         {
             //Arange
-            var requestPayment = this.fakeValidRequestPayment();
+            var requestPayment = this.FakeValidRequestPayment();
             var requestPaymentCode = Guid.NewGuid();
-            var bankResponse = this.fakeBankResponsePayment(requestPaymentCode, PaymentStatusTypes.Pending);
+            var bankResponse = this.FakeBankResponsePayment(requestPaymentCode, PaymentStatusTypes.Pending);
 
             // Act
             var command = new RequestPaymentCommand(requestPayment);
@@ -50,9 +50,9 @@ namespace Checkout.PaymentGateway.Api.Tests
         public async Task GetPaymentDbReturnsAPaymentWithStatusSuccessful()
         {
             //Arange
-            var requestPayment = this.fakeValidRequestPayment();
+            var requestPayment = this.FakeValidRequestPayment();
             var requestPaymentCode = Guid.NewGuid();
-            var bankResponse = this.fakeBankResponsePayment(requestPaymentCode, PaymentStatusTypes.Successful);
+            var bankResponse = this.FakeBankResponsePayment(requestPaymentCode, PaymentStatusTypes.Successful);
 
             // Act
             var command = new RequestPaymentCommand(requestPayment);
@@ -72,9 +72,9 @@ namespace Checkout.PaymentGateway.Api.Tests
         public async Task GetPaymentDbReturnsAPaymentWithStatusUnuccessful()
         {
             //Arange
-            var requestPayment = this.fakeValidRequestPayment();
+            var requestPayment = this.FakeValidRequestPayment();
             var requestPaymentCode = Guid.NewGuid();
-            var bankResponse = this.fakeBankResponsePayment(requestPaymentCode, PaymentStatusTypes.Unsuccessful);
+            var bankResponse = this.FakeBankResponsePayment(requestPaymentCode, PaymentStatusTypes.Unsuccessful);
 
             // Act
             var command = new RequestPaymentCommand(requestPayment);
@@ -90,7 +90,7 @@ namespace Checkout.PaymentGateway.Api.Tests
             Assert.NotNull(result);
         }
 
-        private RequestPayment fakeValidRequestPayment()
+        private RequestPayment FakeValidRequestPayment()
         {
             return new RequestPayment()
             {
@@ -107,7 +107,7 @@ namespace Checkout.PaymentGateway.Api.Tests
             };
         }
 
-        private BankResponsePayment fakeBankResponsePayment(Guid requestCode, PaymentStatusTypes status)
+        private BankResponsePayment FakeBankResponsePayment(Guid requestCode, PaymentStatusTypes status)
         {
             return new BankResponsePayment()
             {
