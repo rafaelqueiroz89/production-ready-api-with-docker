@@ -11,30 +11,30 @@ My branch master is protected and doesn't allow a force push if the development 
 
 
 # Business Discussion
-We will be taking in account that the business needs 2 different flows, the first is requesting a payment from the merchant and the second one is retrieving a made transaction request. The actors of the whole system are:
 
-1. Shopper: Individual who is buying the product online. 
-2. Merchant: The seller of the product.
-3. Payment Gateway: Responsible for validating requests, storing card information and forwarding payment requests and accepting payment responses to and from the acquiring bank. 
-4. Acquiring Bank: Allows us to do the actual retrieval of money from the shopper’s card and payout to the merchant. It also performs some validation of the card information and then sends the payment details to the appropriate 3rd party organization for processing.
+We will be taking in account that the business needs 2 different flows, the first is requesting a payment from the merchant and the second one is retrieving a made transaction request. 
 
 ## Diagrams
 
 <b>Merchant requests a payment</b>
 
-```
-<img src="docs/sequence1.JPG" alt="Logo">
-```
+![](docs/sequence1.JPG)
+ 
 <b>Merchant requests to see the details of a Payment</b>
 
-```mermaid
-sequenceDiagram
-Merchant ->> Payment Gateway: Request Payment details
-Payment Gateway-x Merchant : Response
-```
+![](docs/sequence2.JPG)
+
 <b>Overview of the big picture</b>
 
-```mermaid
-sequenceDiagram
-Merchant ->> Payment Gateway: Request Payment details
-Payment Gateway-x Merchant : Response
+The actors of the whole system are:
+
+![](docs/big_picture.png)
+
+A. Shopper: Individual who is buying the product online. 
+B. Merchant: The seller of the product.
+C. Payment Gateway: Responsible for validating requests, storing card information and forwarding payment requests and accepting payment responses to and from the acquiring bank. 
+D. Acquiring Bank: Allows us to do the actual retrieval of money from the shopper’s card and payout to the merchant. It also performs some validation of the card information and then sends the payment details to the appropriate 3rd party organization for processing.
+
+<b>Request state</b>
+
+![](docs/state_diagram.png)
