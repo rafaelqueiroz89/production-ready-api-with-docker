@@ -18,17 +18,17 @@ We will be taking in account that the business needs 2 different flows, the firs
 
 <b>Merchant requests a payment</b>
 
-![](docs/sequence1.JPG)
+![](docs/sequence1.jpg)
  
 <b>Merchant requests to see the details of a Payment</b>
 
-![](docs/sequence2.JPG)
+![](docs/sequence2.jpg)
 
 <b>Overview of the big picture</b>
 
 The actors of the whole system are:
 
-![](docs/big_picture.png)
+![](docs/big_picture.jpg)
 
 A. Shopper: Individual who is buying the product online. 
 B. Merchant: The seller of the product.
@@ -37,4 +37,4 @@ D. Acquiring Bank: Allows us to do the actual retrieval of money from the shoppe
 
 <b>Request state</b>
 
-![](docs/state_diagram.png)
+![](docs/state_diagram.jpg)
