@@ -20,7 +20,7 @@ namespace Checkout.PaymentGateway.Domain
         Unsuccessful = 1,
 
         /// <summary>
-        /// The pending
+        /// The pending status
         /// </summary>
         Pending = 2
     }
