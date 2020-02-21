@@ -7,6 +7,34 @@ This is an exercise for the coding chagelling from Checkout.com
 Ideally we should not expose Domain objects to the external world, instead we should create an Adapter or use a framework like AutoMapper to transform my Domain object into a DTO and transfer it to different systems
 
 My branch master is protected and doesn't allow a force push if the development branch is with build fail
-=======
-![.NET Core build script](https://github.com/rafaelqueiroz89/payment-gateway/workflows/.NET%20Core%20build%20script/badge.svg)
+======
 
+
+# Business Discussion
+
+We will be taking in account that the business needs 2 different flows, the first is requesting a payment from the merchant and the second one is retrieving a made transaction request. 
+
+## Diagrams
+
+<b>Merchant requests a payment</b>
+
+![](docs/sequence1.JPG)
+ 
+<b>Merchant requests to see the details of a Payment</b>
+
+![](docs/sequence2.JPG)
+
+<b>Overview of the big picture</b>
+
+The actors of the whole system are:
+
+![](docs/big_picture.png)
+
+A. Shopper: Individual who is buying the product online. 
+B. Merchant: The seller of the product.
+C. Payment Gateway: Responsible for validating requests, storing card information and forwarding payment requests and accepting payment responses to and from the acquiring bank. 
+D. Acquiring Bank: Allows us to do the actual retrieval of money from the shopper’s card and payout to the merchant. It also performs some validation of the card information and then sends the payment details to the appropriate 3rd party organization for processing.
+
+<b>Request state</b>
+
+![](docs/state_diagram.png)
