@@ -108,8 +108,6 @@ The Client SDK can be accessed via the DI in .NET Core. It could be a nuget pkg 
 
 I learned a few things I didn't know about Docker and specially the docker-compose.yml, it is a good way to build full applications and to pack and deliver, I also have never used Grafana nor Prometheus, so it was a good learning, I managed to develop a custom metric to expose in Grafana using the Prometheus library, it counts the requests made by the API, it is called <i>gatewayapi_path_counter</i> and it is available on Grafana.
 
-![](docs/metrics_with_prometheus_ and_grafana.JPG)
-
 ## Achievements 
 
 - [x] Application logging
