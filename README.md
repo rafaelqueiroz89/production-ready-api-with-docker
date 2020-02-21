@@ -56,21 +56,15 @@ D. Acquiring Bank: Allows us to do the actual retrieval of money from the shoppe
 Master branch rules:
  - It is protected against push
  - It doesn't allow a force push if the development branch is with build fail
- - Only accepts pull requests
-
-# Technical Discussion
-
-## Git branch strategy
-
-Master branch rules:
- - It is protected against push
- - It doesn't allow a force push if the development branch is with build fail
- - Only accepts pull requests
+ - Only accepts pull requests from development
 
 ## Techonologies, tools, methodologies and frameworks used
 
- - .NET Core 3.0 xUnit for unit testing Some concepts of DDD Serilog for
- - Application logging 
+ - .NET Core 3.0 
+ - xUnit for unit testing 
+ - Some concepts of DDD 
+ - Serilog for Application logging 
+ - Mediator with CQRS patterns
  - Grafana for showing a dashboard of metrics
  - Prometheus for the metrics server 
  - Docker to use containers (with docker-compose) 
@@ -114,7 +108,7 @@ The Client SDK can be accessed via the DI in .NET Core. It could be a nuget pkg 
 
 I learned a few things I didn't know about Docker and specially the docker-compose.yml, it is a good way to build full applications and to pack and deliver, I also have never used Grafana nor Prometheus, so it was a good learning, I managed to develop a custom metric to expose in Grafana using the Prometheus library, it counts the requests made by the API, it is called <i>gatewayapi_path_counter</i> and it is available on Grafana.
 
-![](docs/metrics_with_prometheus_ and_grafana.jpg)
+![](docs/metrics_with_prometheus_ and_grafana.JPG)
 
 ## Achievements 
 
