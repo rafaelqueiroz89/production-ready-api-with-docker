@@ -96,7 +96,7 @@ Master branch rules:
 
 <b>Solution diagram and relationship between projects</b>
 
-![](docs/aggregate_domain_class_diagram.jpg)
+![](docs/project_structure.JPG)
 
 ## Considerations and improvements
 
