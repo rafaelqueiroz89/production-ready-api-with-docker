@@ -7,12 +7,12 @@ namespace Checkout.PaymentGateway.Domain.Interfaces
     /// <summary>
     /// Bank repository
     /// </summary>
-    public interface IBankRequestsRepository
+    public interface IBankRepository
     {
         /// <summary>
         /// Requests the payment.
         /// </summary>
         /// <returns></returns>
-        Task<ResponsePayment> RequestPayment();
+        Task<BankResponsePayment> RequestPaymentAsync(RequestPayment requestPayment);
     }
 }

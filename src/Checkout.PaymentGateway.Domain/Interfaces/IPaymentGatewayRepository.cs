@@ -15,13 +15,20 @@ namespace Checkout.PaymentGateway.Domain.Interfaces
         /// </summary>
         /// <param name="requestPayment">The request payment.</param>
         /// <returns></returns>
-        Task AddPayment(RequestPayment requestPayment);
+        Task<Guid> AddPaymentAsync(RequestPayment requestPayment);
+
+        /// <summary>
+        /// Updates the payment asynchronous.
+        /// </summary>
+        /// <param name="requestPayment">The request payment.</param>
+        /// <returns></returns>
+        Task UpdatePaymentAsync(Guid internalPaymentCode, PaymentStatusTypes paymentStatus, Guid bankPaymentCode);
 
         /// <summary>
         /// Gets the payment.
         /// </summary>
         /// <param name="requestPayment">The request payment.</param>
         /// <returns></returns>
-        Task<ResponsePayment> GetPayment(Guid paymentCode);
+        Task<Payment> GetPaymentAsync(Guid paymentCode);
     }
 }

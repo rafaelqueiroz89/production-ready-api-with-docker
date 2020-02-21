@@ -57,11 +57,11 @@ namespace Checkout.PaymentGateway.Domain
             this.RuleFor(r => r.Card.ExpiryMonth).NotEmpty().InclusiveBetween(1, 12);
             this.RuleFor(r => r.Card.ExpiryYear).NotEmpty().GreaterThanOrEqualTo(DateTime.Now.Year);
             this.RuleFor(r => r.Card.Name).NotEmpty();
-            this.RuleFor(r => r.Amount).NotEmpty().GreaterThan(0);
+            this.RuleFor(r => r.Amount).NotEmpty().GreaterThan(0).NotEmpty();
 
             this.RuleFor(r => r.CurrencyCode).Length(3).NotEmpty();
 
-            this.RuleFor(r => Convert.ToInt32(r.Card.Cvv)).InclusiveBetween(100, 9999);
+            this.RuleFor(r => r.Card.Cvv).Length(3).NotEmpty();
         }
 
         /// <summary>

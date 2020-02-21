@@ -1,0 +1,42 @@
+version: '3.4'
+ 
+networks:
+  default-network:
+
+services:
+  payment-gateway-api:
+    image: payment-gateway-api
+    ports:
+      - 5000:80
+    networks:
+      - default-network
+      
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/    
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    depends_on:
+      - payment-gateway-api
+    networks:
+      - default-network
+    restart: always
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - prometheus
+      - payment-gateway-api
+    networks:
+      - default-network
+    ports:
+      - 3000:3000

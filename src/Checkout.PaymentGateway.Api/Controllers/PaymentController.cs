@@ -41,7 +41,7 @@ namespace Checkout.PaymentGateway.Api.Controllers
         /// <param name="paymentCode">The payment identifier.</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult> GetPayment(Guid paymentCode)
+        public async Task<IActionResult> GetPayment(Guid paymentCode)
         {
             return this.Ok(await this.mediator.Send(new RetrievePaymentQuery(paymentCode)));
         }
@@ -52,9 +52,14 @@ namespace Checkout.PaymentGateway.Api.Controllers
         /// <param name="requestPaymentAggregate">The request payment aggregate.</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> RequestPayment(RequestPayment requestPaymentAggregate)
+        public async Task<IActionResult> RequestPayment(RequestPayment requestPaymentAggregate)
         {
-            return this.Ok(await this.mediator.Send(new RequestPaymentCommand(requestPaymentAggregate)));
+            var entity = await this.mediator.Send(new RequestPaymentCommand(requestPaymentAggregate));
+
+            return new ObjectResult(entity)
+            {
+                StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status201Created
+            };
         }
     }
 }

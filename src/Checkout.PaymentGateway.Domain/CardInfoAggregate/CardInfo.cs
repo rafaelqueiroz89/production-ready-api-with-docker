@@ -1,5 +1,4 @@
-﻿using Checkout.PaymentGateway.Domain.Extensions;
-using Checkout.PaymentGateway.Infrastructure.SeedWork;
+﻿using Checkout.PaymentGateway.Infrastructure.SeedWork;
 
 namespace Checkout.PaymentGateway.Domain
 {
@@ -8,26 +7,6 @@ namespace Checkout.PaymentGateway.Domain
     /// </summary>
     public class CardInfo : IAggregateRoot
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CardInfo"/> class.
-        /// </summary>
-        /// <param name="maskCardDetails">if set to <c>true</c> [mask card details].</param>
-        public CardInfo(bool maskCardDetails)
-        {
-            if (maskCardDetails)
-            {
-                this.CardNumber = this.CardNumber.Masked(0, 10);
-                this.Cvv = this.Cvv.Masked(0, 1);
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CardInfo"/> class.
-        /// </summary>
-        public CardInfo()
-        {
-        }
-
         /// <summary>
         /// Gets or sets the card number.
         /// </summary>

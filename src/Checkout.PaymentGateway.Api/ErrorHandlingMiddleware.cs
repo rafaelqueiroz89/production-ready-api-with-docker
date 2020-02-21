@@ -11,6 +11,8 @@
 
     using Newtonsoft.Json;
 
+    using Serilog;
+
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate next;
@@ -95,6 +97,8 @@
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
+
+            Log.Error(ex, details);
 
             return context.Response.WriteAsync(result);
         }

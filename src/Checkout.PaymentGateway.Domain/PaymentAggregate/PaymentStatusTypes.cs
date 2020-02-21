@@ -1,23 +1,27 @@
-﻿namespace Checkout.PaymentGateway.Domain
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace Checkout.PaymentGateway.Domain
 {
     /// <summary>
     /// This enum represents all the status a payment can have
     /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum PaymentStatusTypes
     {
         /// <summary>
-        /// The pending status
-        /// </summary>
-        Pending = 0,
-
-        /// <summary>
         /// The successful status
         /// </summary>
-        Successful = 1,
+        Successful = 0,
 
         /// <summary>
         /// The unsuccessful status
         /// </summary>
-        Unsuccessful = 2
+        Unsuccessful = 1,
+
+        /// <summary>
+        /// The pending
+        /// </summary>
+        Pending = 2
     }
 }

@@ -1,15 +1,22 @@
 using System.Reflection;
 
 using Checkout.PaymentGateway.CQRS.Commands;
+using Checkout.PaymentGateway.DataModel;
+using Checkout.PaymentGateway.Domain.Interfaces;
+using Checkout.PaymentGateway.Infrastructure;
+using Checkout.PaymentGateway.Infrastructure.Database;
 
 using FluentValidation.AspNetCore;
 
 using MediatR;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+
+using Prometheus;
 
 namespace Checkout.PaymentGateway.Api
 {
@@ -42,7 +49,7 @@ namespace Checkout.PaymentGateway.Api
             services.AddControllers().AddFluentValidation(opt =>
             {
                 opt.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            });
+            }).AddNewtonsoftJson();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c => c.SwaggerDoc("v1",
@@ -58,9 +65,15 @@ namespace Checkout.PaymentGateway.Api
 
             services.AddMediatR(typeof(RequestPaymentCommand).Assembly);
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(TimerPipeline<,>));
+            services.AddScoped<IPaymentGatewayRepository, PaymentGatewayRepository>();
+            services.AddScoped<IBankRepository, BankRepository>();
+            services.AddTransient(typeof(PaymentGatewayContext));
+            services.AddScoped<IPaymentGatewayDbContextUnitOfWork, PaymentGatewayDbContextUnitOfWork>();
+
+            services.AddDbContext<PaymentGatewayContext>(options =>
+                                                         options.UseInMemoryDatabase(databaseName: "PaymentGatewaySvc"));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// <summary>
         /// Configures the specified application.
         /// </summary>
@@ -68,6 +81,16 @@ namespace Checkout.PaymentGateway.Api
         /// <param name="env">The env.</param>
         public void Configure(IApplicationBuilder app)
         {
+            // Custom Metrics to count requests for each endpoint and the method
+            var counter = Metrics.CreateCounter("gatewayapi_path_counter", "Counts requests", new CounterConfiguration
+            {
+                LabelNames = new[] { "method", "endpoint" }
+            }); app.Use((context, next) =>
+            {
+                counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+                return next();
+            });
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -81,6 +104,9 @@ namespace Checkout.PaymentGateway.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseHttpMetrics();
+            app.UseMetricServer();
         }
     }
 }

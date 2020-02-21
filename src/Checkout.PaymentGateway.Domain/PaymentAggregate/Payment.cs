@@ -1,11 +1,13 @@
 ﻿using System;
 
+using Checkout.PaymentGateway.Infrastructure.SeedWork;
+
 namespace Checkout.PaymentGateway.Domain.PaymentAggregate
 {
     /// <summary>
     /// Response of the payment
     /// </summary>
-    public class ResponsePayment
+    public class Payment : IAggregateRoot
     {
         /// <summary>
         /// Gets or sets the payment code.
