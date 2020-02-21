@@ -20,10 +20,9 @@ We will be taking in account that the business needs 2 different flows, the firs
 
 <b>Overview of the big picture</b>
 
-The actors of the whole system are:
-
 ![](docs/big_picture.jpg)
 
+The actors of the whole system are:
 
 A. Shopper: Individual who is buying the product online.
 
@@ -32,16 +31,6 @@ B. Merchant: The seller of the product.
 C. Payment Gateway: Responsible for validating requests, storing card information and forwarding payment requests and accepting payment responses to and from the acquiring bank. 
 
 D. Acquiring Bank: Allows us to do the actual retrieval of money from the shopper’s card and payout to the merchant. It also performs some validation of the card information and then sends the payment details to the appropriate 3rd party organization for processing.
-
-# Technical Discussion
-
-## Git branch strategy
-
-Master branch rules:
- - It is protected against push
- - It doesn't allow a force push if the development branch is with build fail
- - Only accepts pull requests
-
 
 # Technical Discussion
 
@@ -80,3 +69,7 @@ Master branch rules:
 <b>Main domain classes relationship</b>
 
 ![](docs/aggregate_domain_class_diagram.jpg)
+
+<b>Solution structure</b>
+
+![](docs/project_structure.JPG)
