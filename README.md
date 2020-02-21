@@ -7,6 +7,5 @@ This is an exercise for the coding chagelling from Checkout.com
 Ideally we should not expose Domain objects to the external world, instead we should create an Adapter or use a framework like AutoMapper to transform my Domain object into a DTO and transfer it to different systems
 
 My branch master is protected and doesn't allow a force push if the development branch is with build fail
-=======
-![.NET Core build script](https://github.com/rafaelqueiroz89/payment-gateway/workflows/.NET%20Core%20build%20script/badge.svg)
+======
 
