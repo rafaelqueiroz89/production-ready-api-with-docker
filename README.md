@@ -3,7 +3,9 @@ This is an exercise for the coding chagelling from Checkout.com
 
 # How to run
 
-Run the command <blockquote>docker build -t payment-gateway-api .</blockquote>And then <blockquote>docker-compose up</blockquote>
+Go to the src folder
+
+Run the command <blockquote>docker build -t payment-gateway-api .</blockquote> And then <blockquote>docker-compose up</blockquote>
 
 This will build the docker container and run the application (api+grafana+prometheus) with docker-compose.
 
@@ -12,6 +14,8 @@ The following endpoints will be available:
 <b>API:</b> http://localhost:5000</br>
 <b>Grafana:</b> http://localhost:3000</br>
 <b>Prometheus:</b> http://localhost:9090</br>
+
+We can see some metrics here: http://localhost:9090/metrics
 
 The Client for the API is in a separate solution, it will look for the API endpoint to run its tests.
 
