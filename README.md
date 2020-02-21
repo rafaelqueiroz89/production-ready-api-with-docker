@@ -1,5 +1,6 @@
 # Payment Gateway API <a href="https://github.com/rafaelqueiroz89/payment-gateway/actions?query=workflow%3A%22.NET+Core+build+script%22+branch%3Amaster">![.NET Core build script](https://github.com/rafaelqueiroz89/payment-gateway/workflows/.NET%20Core%20build%20script/badge.svg)</a>
-This is an exercise for the coding chagelling from Checkout.com
+
+This is an exercise for the code challenge from Checkout.com
 
 # How to run
 
