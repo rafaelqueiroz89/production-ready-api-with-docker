@@ -105,6 +105,7 @@ namespace Checkout.PaymentGateway.Api.Client.Tests
         /// <param name="service">The service.</param>
         protected override void ConfigureServices(IServiceCollection service)
         {
+#warning change this to the actual URL of the API
             service.AddScopedPaymentGatewaySdk("http://localhost:5000");
         }
     }
