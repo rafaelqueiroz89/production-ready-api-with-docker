@@ -61,6 +61,7 @@ Master branch rules:
 ## Techonologies, tools, methodologies and frameworks used
 
  - .NET Core 3.0 
+ - .NET Standard 2.2
  - xUnit for unit testing 
  - Some concepts of DDD 
  - Serilog for Application logging 
