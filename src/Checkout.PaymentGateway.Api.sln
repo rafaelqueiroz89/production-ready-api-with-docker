@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Infra", "4. Infra", "{F7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Data Model", "5. Data Model", "{000FF435-F403-4A44-9A2C-BB7AB6BF2139}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.PaymentGateway.CQRS", "Checkout.PaymentGateway.Commands\Checkout.PaymentGateway.CQRS.csproj", "{AC108BCA-7419-4092-85CF-71C69AF46191}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.PaymentGateway.CQRS", "Checkout.PaymentGateway.CQRS\Checkout.PaymentGateway.CQRS.csproj", "{AC108BCA-7419-4092-85CF-71C69AF46191}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.PaymentGateway.Infrastructure", "Checkout.PaymentGateway.Infrastructure\Checkout.PaymentGateway.Infrastructure.csproj", "{42DC0DC1-EFFE-4199-8FD2-8AB543F5B1A5}"
 EndProject
