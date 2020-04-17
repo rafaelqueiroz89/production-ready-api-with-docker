@@ -113,10 +113,7 @@ I learned a few things I didn't know about Docker and specially the docker-compo
 
 - [x] Application logging
 - [x] Application metrics
-- [ ] Authentication  
 - [x] API client 
 - [x] Build script / CI 
-- [ ] Performance testing 
 - [x] Data storage 
  
-I haven't done the Authentication part and the performance testing (although there is a Mediator pipeline to measure the beginning and the end of each request).
